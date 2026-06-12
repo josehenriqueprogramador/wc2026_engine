@@ -1,0 +1,28 @@
+services:
+  wc2026:
+
+    build: .
+
+    container_name: wc2026_engine
+
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./api:/app/api
+
+    environment:
+      PYTHONUNBUFFERED: 1
+      OMP_NUM_THREADS: 4
+      OPENBLAS_NUM_THREADS: 4
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
