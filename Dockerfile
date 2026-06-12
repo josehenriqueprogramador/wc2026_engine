@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --upgrade pip setuptools wheel
 
 COPY requirements.txt .
-
+COPY data /app/data
 # ordem importante para evitar conflitos binários
 RUN pip install --prefer-binary numpy==1.26.4
 RUN pip install --prefer-binary scipy==1.13.1
